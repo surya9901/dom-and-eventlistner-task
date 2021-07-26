@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css">
+    <title>Task</title>
+</head>
+
+<body></body>
+
+<script>
+
+    document.body.style.backgroundColor = "lightgrey"
+
+    // 1.Color a span/div element content when a user moves the mouse over the element.
+    var div = document.createElement("div")
+    div.setAttribute("class", "container text-center mt-5")
+    document.body.append(div)
+
+    var head = document.createElement("div")
+    head.innerText = "Hi this part will highlight some color when hovered"
+    head.style.padding = "20px" 
+    head.setAttribute("onmouseover","bgcolor()")
+    head.setAttribute("onmouseout","nocolor()")
+    head.setAttribute("id","header")
+    div.append(head) 
+
+    function bgcolor(){
+        document.getElementById("header").style.backgroundColor = "lightblue";
+    }
+
+    function nocolor(){
+        document.getElementById("header").style.backgroundColor = "";
+    }
+
+
+    //2.Use prompt to read a value from user and display it in the span element
+
+    
+    var div2 = document.createElement("div")
+    div2.setAttribute("class", "container text-center mt-2")
+    document.body.append(div2)
+
+    var inbttn = document.createElement("button")
+    inbttn.style.marginTop = "10px"
+    inbttn.innerText = "Feedback"
+    inbttn.setAttribute("class","btn btn-secondary")
+    inbttn.setAttribute("onclick", "myfunction()")
+    div2.append(inbttn)
+
+    var div3 = document.createElement("div")
+    div3.setAttribute("class", "container text-center mt-4")
+    div2.append(div3)
+
+    var spn = document.createElement("span")
+    spn.setAttribute("id","text")
+    div3.append(spn)
+
+    function myfunction(){
+        var text;
+        let a = prompt("Please leave your feedback here!")
+        if(a == "" || null){
+            alert("No feedback typed!")
+            return false;
+        }
+        else{
+            alert("Feedback received, Thank you!")
+            text = "Received feedback response :<br>" + a
+        }
+        document.getElementById("text").innerHTML = text;
+    }
+
+    // 3.Display the mouse X and Y coordinates in a <span> tag when you click on a <h1> tag which contains a paragraph.
+
+        var div4 = document.createElement("div")
+        div4.setAttribute("class", "container text-center mt-2")
+        document.body.append(div4)
+
+        var h1= document.createElement("h1")
+        div4.append(h1) 
+
+        var para = document.createElement("p")
+        para.style.textAlign="center"
+        para.innerHTML = "Hi, On clicking the mouse over this para you will get to know about the mouse co-ordinates"
+        para.setAttribute("onclick","showcoordinate()")
+        para.setAttribute("onmouseout","clearcoordinate()")
+        h1.append(para)
+
+        var div5 = document.createElement("div")
+        div5.setAttribute("class", "container text-center mt-2")
+        div4.append(div5)
+
+        var span = document.createElement("span")
+        span.setAttribute("id","demo")
+        div5.append(span)
+
+        function clearcoordinate(){
+            document.getElementById("demo").innerHTML = "";
+        }
+
+        function showcoordinate(){
+            var x = event.clientX;
+            var y = event.clientY;
+            var ans = "X co-ordinate = " + x + "<br>Y co-ordinate = "+ y;
+            document.getElementById("demo").innerHTML = ans;
+        }
+
+
+        // 4. Write a Javascript code for character counts in the textarea.
+
+        var div6 = document.createElement("div")
+        div6.setAttribute("class", "container text-center mt-5")
+        document.body.append(div6)
+
+        var adddiv = document.createElement("div")
+        adddiv.setAttribute("class", "container text-center mt-5")
+        div6.append(adddiv)
+
+        var heading1 = document.createElement("p")
+        heading1.innerText = "Additional Comments : "
+        heading1.setAttribute("class","lead")
+        adddiv.append(heading1)
+
+
+        var text_area = document.createElement("textarea")
+        text_area.setAttribute("maxlength","300")
+        text_area.style.height = "150px";
+        text_area.setAttribute("id","text_comment")
+        text_area.setAttribute("class","col-sm-4 col-md-4 col-lg-4 ")
+        div6.append(text_area)
+
+
+        var div7 = document.createElement("div")
+        div7.setAttribute("id","text_counter")
+        div6.append(div7)
+
+        var text = document.getElementById("text_comment")
+        var counter  = document.getElementById("text_counter")
+
+        // syntax : target.addEventListener(type, listener);
+        //target => the div which we are targetting 
+        //addEventListener => capture the event what ever takesplace in the target
+        //type => what type is the event going to be
+        // addEventListener() works by adding a function or an object that implements EventListener to the list of event listeners
+        //listener => here we are adding a funtion so that the listener acts upon the function
+
+        text.addEventListener("input", function (value){
+            const target = value.target;
+            const maxLength = text_area.getAttribute("maxlength")
+            const currentLength = target.value.length;
+            counter.innerHTML = `${currentLength}/${maxLength}` 
+            
+        })
+
+
+        // additionally created
+        var div8 = document.createElement("div")
+        div8.setAttribute("class", "container text-center mt-2")
+        document.body.append(div8) 
+
+        var reset = document.createElement("button")
+        reset.innerText = "Clear text"
+        reset.setAttribute("class","btn btn-danger")
+        reset.setAttribute("id","clear")
+        div8.append(reset) 
+
+        var clearbtn = document.getElementById("clear")
+        var output = document.getElementById("text_comment")
+
+        clearbtn.addEventListener("click", function clear(){
+            output.value = "";
+        });
+
+</script>
+
+</html>
